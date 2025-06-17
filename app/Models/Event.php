@@ -26,10 +26,17 @@ class Event extends Model
         "publish",
         "archived",
         "is_cancelled",
+        "contact_email",
+        "contact_contact",
     ];
 
     protected $casts = [
         "start_time" => "datetime",
         "end_time" => "datetime",
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

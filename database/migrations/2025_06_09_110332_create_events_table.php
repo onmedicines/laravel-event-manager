@@ -44,6 +44,9 @@ return new class extends Migration {
             // Status flags
             $table->boolean("archived")->default(false);
 
+            // Contact Details
+            $table->string("contact_email");
+            $table->string("contact_phone", length: 10)->nullable();
             // SEO/friendly URLs
             // $table->string("slug")->unique();
         });

@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\PasswordResetController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\GuestEventController;
 
 Route::middleware(["guest"])->group(function () {
     /**
@@ -79,10 +81,10 @@ Route::middleware(["auth"])->group(function () {
     /**
      * Display the dashboard for organizer
      */
-    Route::get(
-        "/dashboard",
-        fn() => redirect()->route("events.index", ["sort" => "latest"])
-    )->name("dashboard");
+    Route::get("/dashboard", [DashboardController::class, "view"])->name(
+        "dashboard"
+    );
+    // fn() => redirect()->route("events.index", ["sort" => "latest"])
 
     /**
      * CRUD for events for an organizer
@@ -96,4 +98,12 @@ Route::middleware(["auth"])->group(function () {
         EventController::class,
         "unarchive",
     ])->name("events.unarchive");
+
+    /**
+     * Events for a guest/client
+     */
+    Route::get("/dashboard/buyer/events", [
+        GuestEventController::class,
+        "index",
+    ])->name("guest.events.index");
 });

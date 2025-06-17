@@ -92,6 +92,20 @@
                 <x-form-error name="capacity" />
             </div>
 
+            <!-- Contact details -->
+            <div class="flex flex-col sm:flex-row sm:space-x-8 space-y-12 sm:space-y-0">
+                <div class="space-y-2 grow">
+                    <x-form-label for="contact_email">Contact Email <span class="text-red-500">*</span></x-form-label>
+                    <x-form-input type="string" name="contact_email" id="contact_email" placeholder="e.g. johndoe@gmail.com" min="1" />
+                    <x-form-error name="contact_email" />
+                </div>
+                <div class="space-y-2 grow">
+                    <x-form-label for="contact_phone">Contact number</x-form-label>
+                    <x-form-input type="string" name="contact_phone" id="contact_phone" min="1" />
+                    <x-form-error name="contact_phone" />
+                </div>
+            </div>
+
             <!-- Slug -->
             <!-- <div class="space-y-2">
                 <x-form-label for="slug">Custom URL Slug (optional)</x-form-label>

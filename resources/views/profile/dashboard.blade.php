@@ -2,25 +2,42 @@
     <x-slot:title>Dashboard</x-slot:title>
 
     <x-slot:buttons>
+        @can('create', App\Models\Event::class)
         <a href="/dashboard/events/create" class="self-center z-10 text-md/6 font-semibold text-sky-500 border border-sky-500 px-4 py-2 rounded hover:bg-sky-500 hover:text-white transition-colors duration-200 cursor-pointer">
             New event
         </a>
+        @endcan
     </x-slot:buttons>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:p-0 lg:pt-4 py-8">
 
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-start space-x-4 pb-6">
+            @can('create', App\Models\Events::class)
             <h1 class="text-lg font-bold">Your Events</h1>
+            @else
+            <h1 class="text-lg font-bold">Available Events</h1>
+            @endcan
 
-            <form method="GET" action="{{ route('events.index') }}" class="mt-4 sm:mt-0">
+            @php
+            if (auth()->user()->role === 'organizer')
+                $action = route('events.index');
+            else
+                $action = route('guest.events.index');
+            @endphp
+
+            <form method="GET" action="{{ $action }}" class="mt-4 sm:mt-0">
                 <label for="sort" class="sr-only">Sort</label>
                 <select name="sort" id="sort" onchange="this.form.submit()" class="border border-gray-300 shadow-sm rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm px-2 py-1">
                     <option value="az" {{ request('sort') === 'az' ? 'selected' : '' }}>A → Z</option>
                     <option value="za" {{ request('sort') === 'za' ? 'selected' : '' }}>Z → A</option>
-                    <option value="latest" {{ request('sort') === 'latest' ? 'selected' : '' }}>Latest</option>
+                    <option value="latest" {{ request('sort') === 'latest' ? 'selected' : '' }}>Newly posted</option>
                     <option value="upcoming" {{ request('sort') === 'upcoming' ? 'selected' : '' }}>Upcoming</option>
+                    @can("create", App\Models\Event::class)
+                    <!-- user is an organizer and hence can view archived events -->
+                    <!-- user is an organizer and hence can view ongoing events -->
                     <option value="ongoing" {{ request('sort') === 'ongoing' ? 'selected' : '' }}>Ongoing</option>
                     <option value="archived" {{ request('sort') === 'archived' ? 'selected' : '' }}>Archived</option>
+                    @endcan
                 </select>
             </form>
         </div>

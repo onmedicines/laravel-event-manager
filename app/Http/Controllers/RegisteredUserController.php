@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
         $validated = $request->validate([
             "first_name" => ["required", "min:3"],
             "last_name" => ["required", "min:3"],
-            "email" => ["required", "email"], // does not check for top level domain
+            "email" => ["required", "email"],
             "password" => ["min:6", "confirmed", $check_spaces],
             "role" => ["required", "exists:roles"],
         ]);

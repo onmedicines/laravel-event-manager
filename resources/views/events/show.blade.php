@@ -1,12 +1,14 @@
 <x-layout>
 
     <x-slot:title>{{ $event->title }}</x-slot:title>
+
+    @can("create", App\Models\Event::class)
     <x-slot:buttons>
         <a href="{{ route('events.edit', $event) }}" class="self-center text-md/6 font-semibold text-sky-500 border border-sky-500 px-4 py-2 rounded hover:bg-sky-500 hover:text-white transition-colors duration-200 cursor-pointer">
             Edit
         </a>
         <div class="relative self-center">
-            <button @click="showConfirm = true"
+            <button @click="showConfirm = true, open = false"
                 class="text-md/6 font-semibold text-red-500 border border-red-500 px-4 py-2 rounded hover:bg-red-500 hover:text-white transition-colors duration-200 cursor-pointer">
                 Delete
             </button>
@@ -34,6 +36,8 @@
         @endif
 
     </x-slot:buttons>
+    @endcan
+
 
     <!-- Confirmation Modal -->
     <div x-show="showConfirm"

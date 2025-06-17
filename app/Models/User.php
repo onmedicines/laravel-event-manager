@@ -54,4 +54,14 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(Ticket::class, Event::class);
     }
+
+    public function isOrganizer()
+    {
+        return $this->role === "organizer";
+    }
+
+    public function isGuest()
+    {
+        return $this->role === "guest";
+    }
 }

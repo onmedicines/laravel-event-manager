@@ -37,6 +37,9 @@ class EventController extends Controller
                     ->where("end_date", ">=", now());
                 break;
             case "archived":
+                if (auth()->user()->role !== "organizer") {
+                    abort(403);
+                }
                 $query->where("archived", true);
                 break;
             case "latest":
@@ -87,6 +90,8 @@ class EventController extends Controller
             // 'latitude' and 'longitude'
             "price" => ["required", "numeric", "min:0"],
             "capacity" => ["nullable", "integer", "min:1"],
+            "contact_email" => ["required", "email"],
+            "contact_phone" => ["nullable", "size:10"],
             // "slug" => ["nullable","string","alpha_dash","unique:events,slug"],
         ]);
         $validated["user_id"] = Auth::id();
@@ -169,7 +174,7 @@ class EventController extends Controller
 
         $event->delete();
 
-        return redirect()->route("events.index");
+        return redirect()->route("events.index", ["sort" => "latest"]);
     }
 
     /**

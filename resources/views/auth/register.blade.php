@@ -49,14 +49,17 @@
                     </div>
                 </div>
 
-                <div class="flex items-center space-x-4">
-                    <label for="role" class="block text-sm/6 font-medium text-gray-900">
-                        I am here to
-                    </label>
-                    <select name="role" id="role" class="grow border border-gray-300 shadow-sm rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm px-2 py-1">
-                        <option value="organizer" {{ old('role') === 'organizer' ? 'selected' : '' }}>organize events</option>
-                        <option value="guest" {{ old('role') === 'guest' ? 'selected' : '' }}>buy tickets</option>
-                    </select>
+                <div>
+                    <div class="flex items-center space-x-4">
+                        <label for="role" class="block text-sm/6 font-medium text-gray-900">
+                            I am here to
+                        </label>
+                        <select name="role" id="role" class="grow border border-gray-300 shadow-sm rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm px-2 py-1">
+                            <option value="organizer" {{ old('role') === 'organizer' ? 'selected' : '' }}>organize events</option>
+                            <option value="guest" {{ old('role') === 'guest' ? 'selected' : '' }}>buy tickets</option>
+                        </select>
+                    </div>
+                    <x-form-error name="role" />
                 </div>
 
                 <div>
