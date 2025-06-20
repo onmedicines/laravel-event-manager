@@ -84,12 +84,15 @@ Route::middleware(["auth"])->group(function () {
     Route::get("/dashboard", [DashboardController::class, "view"])->name(
         "dashboard"
     );
-    // fn() => redirect()->route("events.index", ["sort" => "latest"])
 
     /**
      * CRUD for events for an organizer
      */
     Route::resource("/dashboard/events", EventController::class);
+
+    /**
+     * Archive and Unarchive for events for an organizer
+     */
     Route::patch("/dashboard/events/{event}/archive", [
         EventController::class,
         "archive",
@@ -101,9 +104,17 @@ Route::middleware(["auth"])->group(function () {
 
     /**
      * Events for a guest/client
+     * only show all events (no CRUD operations)
      */
     Route::get("/dashboard/buyer/events", [
         GuestEventController::class,
         "index",
     ])->name("guest.events.index");
+
+    /**
+     * Tickets for a guest/client
+     */
+    // Route::controller(TicketController::class)->group(function () {
+    //    Route::get('/dashboard/buyer/tickets')
+    // });
 });

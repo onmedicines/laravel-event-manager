@@ -119,5 +119,17 @@
             <p class="text-base text-gray-800">{{ $event->capacity }}</p>
         </div>
         @endif
+
+        <!-- Contact details -->
+        <div>
+            <h3 class="text-md font-semibold text-gray-700">Contact email</h3>
+            <p class="text-base text-gray-800">{{ $event->contact_email }}</p>
+        </div>
+        @if ($event->contact_phone)
+        <div>
+            <h3 class="text-md font-semibold text-gray-700">Contact phone</h3>
+            <p class="text-base text-gray-800">{{ $event->contact_phone }}</p>
+        </div>
+        @endif
     </div>
 </x-layout>

@@ -11,7 +11,10 @@ class GuestEventController extends Controller
     public function index(Request $request)
     {
         $query = Event::query();
-        $query->where("archived", false)->with("user:id,first_name,last_name");
+        $query
+            ->where("archived", false)
+            ->where("start_time", ">", now())
+            ->with("user:id,first_name,last_name");
 
         switch ($request->sort) {
             case "az":
@@ -19,9 +22,6 @@ class GuestEventController extends Controller
                 break;
             case "za":
                 $query->orderBy("title", "desc");
-                break;
-            case "upcoming":
-                $query->where("start_date", ">", now());
                 break;
             case "latest":
             case null:

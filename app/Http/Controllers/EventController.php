@@ -28,13 +28,16 @@ class EventController extends Controller
             case "upcoming":
                 $query
                     ->where("archived", false)
-                    ->where("start_date", ">", now());
+                    ->where("start_time", ">", now());
                 break;
             case "ongoing":
                 $query
                     ->where("archived", false)
-                    ->where("start_date", "<=", now())
-                    ->where("end_date", ">=", now());
+                    ->where("start_time", "<=", now())
+                    ->where("end_time", ">=", now());
+                break;
+            case "ended":
+                $query->where("archived", false)->where("end_time", "<", now());
                 break;
             case "archived":
                 if (auth()->user()->role !== "organizer") {

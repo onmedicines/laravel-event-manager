@@ -21,7 +21,7 @@
             @php
             if (auth()->user()->role === 'organizer')
                 $action = route('events.index');
-            else
+            elseif (auth()->user()->role === 'guest')
                 $action = route('guest.events.index');
             @endphp
 
@@ -30,12 +30,15 @@
                 <select name="sort" id="sort" onchange="this.form.submit()" class="border border-gray-300 shadow-sm rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm px-2 py-1">
                     <option value="az" {{ request('sort') === 'az' ? 'selected' : '' }}>A → Z</option>
                     <option value="za" {{ request('sort') === 'za' ? 'selected' : '' }}>Z → A</option>
-                    <option value="latest" {{ request('sort') === 'latest' ? 'selected' : '' }}>Newly posted</option>
-                    <option value="upcoming" {{ request('sort') === 'upcoming' ? 'selected' : '' }}>Upcoming</option>
+                    <option value="latest" {{ request('sort') === 'latest' ? 'selected' : '' }}>Latest</option>
                     @can("create", App\Models\Event::class)
-                    <!-- user is an organizer and hence can view archived events -->
+                    <!-- user is an organizer and hence can view ended events -->
+                    <option value="ended" {{ request('sort') === 'ended' ? 'selected' : '' }}>Ended</option>
+                    <!-- user is an organizer and hence can view upcoming events -->
+                    <option value="upcoming" {{ request('sort') === 'upcoming' ? 'selected' : '' }}>Upcoming</option>
                     <!-- user is an organizer and hence can view ongoing events -->
                     <option value="ongoing" {{ request('sort') === 'ongoing' ? 'selected' : '' }}>Ongoing</option>
+                    <!-- user is an organizer and hence can view archived events -->
                     <option value="archived" {{ request('sort') === 'archived' ? 'selected' : '' }}>Archived</option>
                     @endcan
                 </select>
@@ -44,7 +47,14 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse ($events as $e)
-                <a href={{ route("events.show", $e) }} class="bg-white/30 backdrop-blur-sm hover:backdrop-blur-md p-6 shadow-sm rounded-xl transition" >
+                <a href={{ route("events.show", $e) }} class="bg-white/30 backdrop-blur-sm hover:backdrop-blur-md p-6 shadow-sm rounded-xl transition">
+                    @if ($e->end_time < now())
+                    <p class="text-xs text-red-400 font-semibold">ended</p>
+                    @elseif ($e->start_time < now() && $e->end_time > now())
+                    <p class="text-xs text-amber-500 font-semibold">ongoing</p>
+                    @elseif ($e->start_time > now())
+                    <p class="text-xs text-green-600 font-semibold">upcoming</p>
+                    @endif
                     <h2 class="text-xl font-semibold mb-2">{{ $e->title }}</h2>
                     <p class="text-sm">{{ $e->start_time->format('F j, Y') }}</p>
                     <p class="text-sm">{{ $e->start_time->format('g:i A') }}</p>
