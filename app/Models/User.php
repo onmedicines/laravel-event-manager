@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function tickets()
     {
-        return $this->hasManyThrough(Ticket::class, Event::class);
+        return $this->hasMany(Ticket::class);
     }
 
     public function isOrganizer()

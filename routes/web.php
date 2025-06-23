@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EventController;
+use App\Http\Controllers\OrganizerEventController;
 use App\Http\Controllers\PasswordResetController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\GuestEventController;
+use App\Http\Controllers\TicketController;
 
 Route::middleware(["guest"])->group(function () {
     /**
@@ -88,17 +89,17 @@ Route::middleware(["auth"])->group(function () {
     /**
      * CRUD for events for an organizer
      */
-    Route::resource("/dashboard/events", EventController::class);
+    Route::resource("/dashboard/events", OrganizerEventController::class);
 
     /**
      * Archive and Unarchive for events for an organizer
      */
     Route::patch("/dashboard/events/{event}/archive", [
-        EventController::class,
+        OrganizerEventController::class,
         "archive",
     ])->name("events.archive");
     Route::patch("/dashboard/events/{event}/unarchive", [
-        EventController::class,
+        OrganizerEventController::class,
         "unarchive",
     ])->name("events.unarchive");
 
@@ -114,7 +115,11 @@ Route::middleware(["auth"])->group(function () {
     /**
      * Tickets for a guest/client
      */
-    // Route::controller(TicketController::class)->group(function () {
-    //    Route::get('/dashboard/buyer/tickets')
-    // });
+    Route::controller(TicketController::class)->group(function () {
+        Route::get("/dashboard/buyer/tickets", "index")->name("tickets.index");
+        Route::post("/dashboard/buyer/events/{event}/tickets", "store")->name(
+            "tickets.store"
+        );
+        Route::get("/dashboard/buyer/{ticket}", "show")->name("tickets.show");
+    });
 });

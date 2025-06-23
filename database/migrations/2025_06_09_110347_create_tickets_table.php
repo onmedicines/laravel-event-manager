@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,15 +15,15 @@ return new class extends Migration {
         Schema::create("tickets", function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string("first_name");
-            $table->string("last_name");
-            $table->string("phone", 10);
-            $table->string("email");
-            $table->double("amount_paid", 10, 7);
+            $table
+                ->foreignIdFor(User::class)
+                ->constrained()
+                ->onDelete("cascade");
             $table
                 ->foreignIdFor(Event::class)
                 ->constrained()
                 ->onDelete("cascade");
+            $table->double("amount_paid", 10, 7);
             $table->string("qr_code")->unique();
             $table->timestamp("scanned_at")->nullable();
         });

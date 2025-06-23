@@ -34,7 +34,17 @@
             </button>
         </form>
         @endif
+    </x-slot:buttons>
+    @elsecan('create', App\Models\Ticket::class)
+    <x-slot:buttons>
+        <form method="POST" action="{{ route('tickets.store', $event) }}" class="self-center">
+            @csrf
 
+            <button type="submit"
+                class="self-center text-md/6 font-semibold text-sky-500 border border-sky-500 px-4 py-2 rounded hover:bg-sky-500 hover:text-white transition-colors duration-200 cursor-pointer">
+                    Buy ticket
+            </button>
+        </form>
     </x-slot:buttons>
     @endcan
 

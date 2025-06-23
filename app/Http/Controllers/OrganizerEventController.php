@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Str;
 
-class EventController extends Controller
+class OrganizerEventController extends Controller
 {
     /**
      * Display a listing of the resource.

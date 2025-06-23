@@ -6,6 +6,10 @@
         <a href="/dashboard/events/create" class="self-center z-10 text-md/6 font-semibold text-sky-500 border border-sky-500 px-4 py-2 rounded hover:bg-sky-500 hover:text-white transition-colors duration-200 cursor-pointer">
             New event
         </a>
+        @else
+        <a href="/dashboard/buyer/tickets" class="self-center z-10 text-md/6 font-semibold text-sky-500 border border-sky-500 px-4 py-2 rounded hover:bg-sky-500 hover:text-white transition-colors duration-200 cursor-pointer">
+            My tickets
+        </a>
         @endcan
     </x-slot:buttons>
 
@@ -19,11 +23,14 @@
             @endcan
 
             @php
-            if (auth()->user()->role === 'organizer')
+            if (auth()->user()->role === 'organizer'){
                 $action = route('events.index');
-            elseif (auth()->user()->role === 'guest')
+            }
+            else if (auth()->user()->role === 'guest'){
                 $action = route('guest.events.index');
+            }
             @endphp
+
 
             <form method="GET" action="{{ $action }}" class="mt-4 sm:mt-0">
                 <label for="sort" class="sr-only">Sort</label>
