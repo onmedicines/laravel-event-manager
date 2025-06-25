@@ -3,11 +3,11 @@
 
     <x-slot:buttons>
         @can('create', App\Models\Event::class)
-        <a href="/dashboard/events/create" class="self-center z-10 text-md/6 font-semibold text-sky-500 border border-sky-500 px-4 py-2 rounded hover:bg-sky-500 hover:text-white transition-colors duration-200 cursor-pointer">
+        <a href="/dashboard/events/create" class="self-center z-10 text-md/6 font-semibold bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-500 cursor-pointer">
             New event
         </a>
         @else
-        <a href="/dashboard/buyer/tickets" class="self-center z-10 text-md/6 font-semibold text-sky-500 border border-sky-500 px-4 py-2 rounded hover:bg-sky-500 hover:text-white transition-colors duration-200 cursor-pointer">
+        <a href="/dashboard/buyer/tickets" class="self-center z-10 text-md/6 font-semibold bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-500 cursor-pointer">
             My tickets
         </a>
         @endcan

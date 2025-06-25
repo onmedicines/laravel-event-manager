@@ -9,7 +9,7 @@
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-lg">
             <form class="space-y-6" action="/register" method="POST">
                 @csrf
-                <div class="flex gap-4">
+                <div class="flex flex-col gap-6 sm:gap-2 sm:flex-row sm:space-x-8 sm:space-y-0">
                     <div class="grow">
                         <label for="first_name" class="block text-sm/6 font-medium text-gray-900">First name</label>
                         <div class="mt-2">

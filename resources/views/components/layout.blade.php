@@ -16,7 +16,7 @@
                         <div :class="{ 'blur-sm overflow-hidden': open || showConfirm }" class="flex lg:flex-1 transition-all duration-500 ease-in-out motion-reduce:transition-none" style="transition-property: opacity, filter;">
                             <a href="/" class="-m-1.5 p-1.5">
                                 <span class="sr-only">Your Company</span>
-                                <img class="h-6 w-auto" src="{{ asset('tailwindcss-mark.d52e9897.svg') }}" alt="logo">
+                                <p class="text-2xl text-indigo-600 font-black font-serif">Z</p>
                             </a>
                         </div>
                         <!-- Hamburger Button for Small Screens -->

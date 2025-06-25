@@ -2,14 +2,14 @@
 
     <x-slot:title>{{ $event->title }}</x-slot:title>
 
-    @can("create", App\Models\Event::class)
+    @can("update", $event)
     <x-slot:buttons>
-        <a href="{{ route('events.edit', $event) }}" class="self-center text-md/6 font-semibold text-sky-500 border border-sky-500 px-4 py-2 rounded hover:bg-sky-500 hover:text-white transition-colors duration-200 cursor-pointer">
+        <a href="{{ route('events.edit', $event) }}" class="self-center text-md/6 font-semibold text-white bg-indigo-600/80 px-4 py-2 rounded hover:bg-indigo-600 cursor-pointer">
             Edit
         </a>
         <div class="relative self-center">
             <button @click="showConfirm = true, open = false"
-                class="text-md/6 font-semibold text-red-500 border border-red-500 px-4 py-2 rounded hover:bg-red-500 hover:text-white transition-colors duration-200 cursor-pointer">
+                class="text-md/6 font-semibold bg-red-500/80 text-white px-4 py-2 rounded hover:bg-red-500 cursor-pointer">
                 Delete
             </button>
         </div>
@@ -35,13 +35,13 @@
         </form>
         @endif
     </x-slot:buttons>
-    @elsecan('create', App\Models\Ticket::class)
+    @elseif(auth()->user()->isGuest())
     <x-slot:buttons>
         <form method="POST" action="{{ route('tickets.store', $event) }}" class="self-center">
             @csrf
 
             <button type="submit"
-                class="self-center text-md/6 font-semibold text-sky-500 border border-sky-500 px-4 py-2 rounded hover:bg-sky-500 hover:text-white transition-colors duration-200 cursor-pointer">
+                class="self-center text-md/6 font-semibold text-white bg-indigo-600/80 px-4 py-2 rounded hover:bg-indigo-600 cursor-pointer">
                     Buy ticket
             </button>
         </form>
@@ -80,8 +80,10 @@
 
     <div :class="{ 'blur-sm overflow-hidden': showConfirm }"  class="space-y-8 py-8 transition-all duration-500 ease-in-out motion-reduce:transition-none" style="transition-property: opacity, filter;">
         @if(session('success'))
-        <p class="text-green-500 font-semibold">{{ session("success") }}</p>
+        <p class="text-green-600 font-semibold">{{ session("success") }}</p>
         @endif
+
+        <h1 class="block lg:hidden z-10 text-2xl font-bold tracking-tight text-gray-700">{{ $event->title }}</h1>
 
         <!-- Category -->
         <div>

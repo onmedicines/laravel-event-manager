@@ -127,7 +127,7 @@
         <!-- Submit -->
         <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 pt-8">
         <x-link href="{{ route('dashboard') }}" class="">Cancel</x-link>
-            <button type="submit" class="text-md/6 font-semibold text-sky-500 border border-sky-500 px-4 py-2 rounded hover:bg-sky-500 hover:text-white transition-colors duration-200 cursor-pointer">Create</button>
+            <button type="submit" class="text-md/6 font-semibold text-white bg-indigo-600/80 px-4 py-2 rounded hover:bg-indigo-600 cursor-pointer">Create</button>
         </div>
     </form>
 </x-layout>
