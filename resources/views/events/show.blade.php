@@ -40,9 +40,8 @@
         <form method="POST" action="{{ route('tickets.store', $event) }}" class="self-center">
             @csrf
 
-            <button type="submit"
-                class="self-center text-md/6 font-semibold text-white bg-indigo-600/80 px-4 py-2 rounded hover:bg-indigo-600 cursor-pointer">
-                    Buy ticket
+            <button type="submit" class="self-center text-md/6 font-semibold text-white bg-indigo-600/80 px-4 py-2 rounded hover:bg-indigo-600 cursor-pointer">
+                Buy ticket
             </button>
         </form>
     </x-slot:buttons>
