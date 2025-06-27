@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot:title>Dashboard</x-slot:title>
+    <x-slot:title>Tickets</x-slot:title>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:p-0 lg:pt-4 py-8">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-start space-x-4 pb-6">
@@ -17,7 +17,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse ($tickets as $t)
             <div class="flex flex-col gap-2">
-                <a href="{{ route('events.show', $t) }}" class="bg-white/30 backdrop-blur-sm hover:backdrop-blur-md rounded-xl transition p-6 shadow-sm">
+                <a href="{{ route('events.show', $t->event) }}" class="bg-white/30 backdrop-blur-sm hover:backdrop-blur-md rounded-xl transition p-6 shadow-sm">
                     @if ($t->event->end_time < now())
                     <p class="text-xs text-red-400 font-semibold">ended</p>
                     @elseif ($t->event->start_time < now() && $t->event->end_time > now())
