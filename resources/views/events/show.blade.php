@@ -4,17 +4,14 @@
 
     @can("update", $event)
     <x-slot:buttons>
-        <a href="{{ route('events.edit', $event) }}" class="self-center text-md/6 font-semibold text-white bg-indigo-600/80 px-4 py-2 rounded hover:bg-indigo-600 cursor-pointer">
+        <a href="{{ route('events.edit', $event) }}" class="text-center text-md/6 font-semibold text-white bg-indigo-600/80 px-4 py-2 rounded hover:bg-indigo-600 cursor-pointer">
             Edit
         </a>
-        <div class="relative self-center">
-            <button @click="showConfirm = true, open = false"
-                class="text-md/6 font-semibold bg-red-500/80 text-white px-4 py-2 rounded hover:bg-red-500 cursor-pointer">
-                Delete
-            </button>
+        <div @click="showConfirm = true, open = false" class="relative text-center text-md/6 font-semibold bg-red-500/80 text-white px-4 py-2 rounded hover:bg-red-500 cursor-pointer">
+            Delete
         </div>
         @if (!$event->archived)
-        <form method="POST" action="{{ route('events.archive', $event) }}" class="self-center">
+        <form method="POST" action="{{ route('events.archive', $event) }}" class="text-center">
             @csrf
             @method('PATCH')
 
@@ -24,7 +21,7 @@
             </button>
         </form>
         @else
-        <form method="POST" action="{{ route('events.unarchive', $event) }}" class="self-center">
+        <form method="POST" action="{{ route('events.unarchive', $event) }}" class="text-center">
             @csrf
             @method('PATCH')
 
@@ -37,10 +34,10 @@
     </x-slot:buttons>
     @elseif(auth()->user()->isGuest())
     <x-slot:buttons>
-        <form method="POST" action="{{ route('tickets.store', $event) }}" class="self-center">
+        <form method="POST" action="{{ route('tickets.store', $event) }}" class="text-center">
             @csrf
 
-            <button type="submit" class="self-center text-md/6 font-semibold text-white bg-indigo-600/80 px-4 py-2 rounded hover:bg-indigo-600 cursor-pointer">
+            <button type="submit" class=" text-md/6 font-semibold text-white bg-indigo-600/80 px-4 py-2 rounded hover:bg-indigo-600 cursor-pointer">
                 Buy ticket
             </button>
         </form>

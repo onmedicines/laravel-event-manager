@@ -3,6 +3,8 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrganizerEventController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\ScanTicketController;
+use App\Http\Middleware\IsOrganizer;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
@@ -122,4 +124,12 @@ Route::middleware(["auth"])->group(function () {
         );
         Route::get("/dashboard/buyer/{ticket}", "show")->name("tickets.show");
     });
+
+    /**
+     * Scan ticker for organizers
+     */
+    Route::view("/dashboard/scan", "tickets.scan")->middleware(
+        IsOrganizer::class
+    );
+    Route::post("/dashboard/scan", [ScanTicketController::class, "scan"]);
 });

@@ -43,8 +43,8 @@
                                 class="fixed inset-y-0 right-0 z-100 w-64 md:w-72 bg-white shadow-md py-6 px-4 lg:hidden"
                                 @click.away="open = false"
                             >
-                                <nav class="flex flex-col items-end space-y-8">
-                                    <button @click="open = !open" type="button" class="mb-8 inline-flex items-center justify-center p-2 text-gray-700 hover:text-gray-900 focus:outline-none">
+                                <nav class="flex flex-col items-stretch space-y-8">
+                                    <button @click="open = !open" type="button" class="self-end mb-8 inline-flex items-center justify-center p-2 text-gray-700 hover:text-gray-900 focus:outline-none">
                                         <span class="sr-only">Open menu</span>
                                         <svg class="h-6 w-6" x-show="!open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -53,24 +53,30 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                                         </svg>
                                     </button>
-                                    <!-- <a href="/" @click="open = false" class="self-center text-gray-800 hover:text-blue-600 text-lg font-semibold">Home</a>
-                                    <a href="/events" @click="open = false" class="self-center text-gray-800 hover:text-blue-600 text-lg font-semibold">Events</a>
-                                    <a href="/tickets" @click="open = false" class="self-center text-gray-800 hover:text-blue-600 text-lg font-semibold">Tickets</a>
-                                    <a href="/contact" @click="open = false" class="self-center text-gray-800 hover:text-blue-600 text-lg font-semibold">Contact</a> -->
+                                    <!-- <a href="/" @click="open = false" class=" text-gray-800 hover:text-blue-600 text-lg font-semibold">Home</a>
+                                    <a href="/events" @click="open = false" class=" text-gray-800 hover:text-blue-600 text-lg font-semibold">Events</a>
+                                    <a href="/tickets" @click="open = false" class=" text-gray-800 hover:text-blue-600 text-lg font-semibold">Tickets</a>
+                                    <a href="/contact" @click="open = false" class=" text-gray-800 hover:text-blue-600 text-lg font-semibold">Contact</a> -->
 
                                     @guest
-                                    <a href="/login" @click="open = false" class="self-center text-gray-800 text-lg font-semibold hover:text-gray-600 transition-all">Log in</a>
-                                    <a href="/register" @click="open = false" class="self-center text-gray-800 text-lg font-semibold hover:text-gray-600 transition-all">Register</a>
+                                    <a href="/login" @click="open = false" class="text-center text-gray-800 text-lg font-semibold hover:text-gray-600 transition-all">
+                                        Log in
+                                    </a>
+                                    <a href="/register" @click="open = false" class="text-center text-gray-800 text-lg font-semibold hover:text-gray-600 transition-all">
+                                        Register
+                                    </a>
                                     @endguest
 
                                     @auth
                                     @isset($buttons)
                                     {{  $buttons }}
                                     @endisset
-                                    <form method="POST" action="/logout" @submit="open = false" class="self-center">
+                                    <form method="POST" action="/logout" @submit="open = false" class="">
                                         @csrf
                                         @method("DELETE")
-                                        <button type="submit" class="text-left w-full text-gray-800 hover:text-red-600 text-lg font-semibold transition-all">Log out</button>
+                                        <button type="submit" class="text-center w-full text-gray-800 hover:text-red-600 text-lg font-semibold transition-all">
+                                            Log out
+                                        </button>
                                     </form>
                                     @endauth
                                 </nav>
